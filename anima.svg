@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg[
+ <!ATTLIST image width CDATA "100%" 
+     height CDATA "100%" 
+     preserveAspectRatio CDATA "none">
+ <!ENTITY fname "pic/pic_">
+]> 
+<svg width="200px" height="30px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="main">
+    <defs> 
+        <image xlink:href="&fname;01.png" id="f1"/>
+        <image xlink:href="&fname;02.png" id="f2"/>
+        <!-- <image xlink:href="&fname;03.png" id="f3"/> -->
+        <!-- <image xlink:href="&fname;04.png" id="f4"/> -->
+    </defs>
+    <use>
+        <animate attributeName="xlink:href" begin="0s" dur="1s" repeatCount="indefinite"
+        values="#f1;#f2;" />
+        <!-- <animate attributeName="xlink:href" begin="0s" dur="1s" repeatCount="indefinite" -->
+        <!-- values="#f1;#f2;#f3;#f4" /> -->
+    </use>
+</svg>
+
