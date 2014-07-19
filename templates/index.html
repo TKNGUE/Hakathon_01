@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>NUT Hakacthon ver3.0 @ takgue</title>
+<style type="text/css">
+    <!--
+    body { 
+        text-align:center;
+        background-color:#ffffff; 
+    }
+    #wrap { width:auto; text-align:center; margin:0 auto; background-color:#ffffff; padding:10px; }
+    #inner { margin:0 auto; }
+    #content { list-style-type:none; }
+    <!-- #content div { margin: 0 0 1px 0; padding: 5px 25px 5px 0; line-height:120%; } -->
+    #canvas { 
+        height:600px;
+        width: auto; 
+    }
+    -->
+</style>
+<script>
+var ws;
+window.onload = function(){
+    if ("WebSocket" in window) {
+        ws = new WebSocket("ws://localhost:8888/websocket");
+
+        ws.onopen = function() {
+            document.getElementById("send").disabled = false;
+        };
+        ws.onmessage = function(message) {
+            var txtNode = document.createTextNode(message.data);
+            var brNode = document.createElement('br');
+            var cnode = document.getElementById("content");
+            cnode.appendChild(txtNode);
+            cnode.appendChild(brNode);
+        };
+
+        ws.onclose = function(){
+            document.getElementById("send").disabled = true;
+        };
+
+        document.getElementById("send").onclick = function(){
+            var name = document.getElementById("name");
+            var msg  = document.getElementById("message");
+            ws.send( name.value + " > " + msg.value );
+            msg.value="";
+        };
+    }else{
+        alert("You have no web sockets");
+    };
+};
+window.onunload = function() {ws.close();};
+</script>
+
+</head>
+<body>
+    <h1>Cheer you : One for all, All for one @ Group Chat</h1>
+    <div class="round" id="wrap">
+        <div id="inner">
+            <div id="mainWrap">
+                <input id="name" type="text" size="15" value=""/>
+                <input id="message" type="text" size="20" value=""/>
+                <input id="enter" type="button" value="Enter" disabled />
+                <!--
+                <input id="close" type="button" value="close" onclick="ws.close();" />
+                -->
+                <div id="content">
+                </div>
+                <svg  id='canvas'
+                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    height='500px'
+                    width='500px'
+                    version="1.1">
+                    <defs>
+                        <g id='user'>
+                            <use id='state' xlink:href='#emo00' x='0' y='0' />
+                            <text id='name'
+                                style="font-size:20px;
+                                       font-style:normal;
+                                       font-weight:normal;
+                                       line-height:125%;
+                                       letter-spacing:0px;
+                                       word-spacing:0px;
+                                       fill:#000000;
+                                       fill-opacity:1;
+                                       stroke:none;
+                                       font-family:Arial"
+                                x='60' y='70'
+                                >
+                                UserName
+                            </text>
+                            <text id='comment'
+                                style="font-size:40px;
+                                       font-style:normal;
+                                       font-weight:normal;
+                                       line-height:125%;
+                                       letter-spacing:0px;
+                                       word-spacing:0px;
+                                       fill:#000000;
+                                       fill-opacity:1;
+                                       stroke:none;
+                                       font-family:Arial"
+                                       x='150' y='40'>
+                                 ＜statement
+                            </text> 
+                        </g>
+                    </defs>
+                    <!-- <circle r='20' cx='30' cy='50' fill='red'/> -->
+                    <use xlink:href='#user' x='0' y='0'  />
+                    <use xlink:href='#user' x='100' y='100' />
+                    <use xlink:href='#user' x='100' y='200' />
+                </svg>
+            </div>
+        </div>
+    </div>
+</body>
+
+<svg 
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:cc="http://creativecommons.org/ns#"
+xmlns:svg="http://www.w3.org/2000/svg"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+id="svg2"
+version="1.1"
+sodipodi:docname="anime.svg">
+<defs
+    id="defs4">
+<text id='emo00'
+    style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial"
+    x='70px'
+    y='40px'
+    >
+    ('ω')
+</text>
+<text id='emo01'
+    style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial"
+    x='0px'
+    y='40px'
+    transform='scale(1)'
+    >
+    ＼\٩('ω')و/／
+</text>
+<g id='emo02' transform='scale(-1.0, 1) translate(-214)'>
+    <use xlink:href='#emo01'/>
+</g>
+<text id='emo03'
+    style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial"
+    sodipodi:linespacing="125%"><tspan x='50' y='40'>٩('ω')و</tspan></text>
+<g id='emo04' >
+    <use xlink:href='#emo03' transform='scale(-1.0, 1) translate(-215)'/>
+</g>
+<path d="M 0,0 L 100,000 L 0,0"
+        stroke="lightgrey" stroke-width="20" 
+        fill="none" id="theMotionPath"/>
+<g id='cheer_strong'>
+    <text x='20' font-size='30px'>あきらめるな！</text>
+    <use xlink:href='#emo01'>
+        <animate attributeName="xlink:href"  dur="2s" repeatCount="indefinite" values="#emo02;#emo01;" />
+    </use>
+</g>
+<g id='cheer_slow'>
+    <use>
+        <animate attributeName="xlink:href" repeatCount='indefinite' dur='1.0s' values="#emo03;#emo04;"/>
+    </use>
+</g>
+<g id='cheer_fast'>
+    <use>
+        <animate attributeName="xlink:href" repeatCount='indefinite' dur='0.3s' values="#emo03;#emo04;"/>
+    </use>
+</g>
+<g id='anime01'>
+    <use>
+        <animate attributeName="xlink:href" repeatCount='indefinite' begin='0' dur='2s' values="#emo00;#cheer_fast;#cheer_strong"/>
+    </use>
+</g>
+</defs>
+</svg>
+</html>
